@@ -1,7 +1,9 @@
 package src.main.algorithms.simple;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -37,6 +39,85 @@ public class TwoSum {
                 }
             }
         }
+
+        return null;
+    }
+
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     * 两次hash
+     */
+    public int[] slution2(int[] nums, int target) {
+        if (null == nums || nums.length == 0) {
+            return null;
+        }
+
+        Map<Integer/*数组元素*/, Set<Integer/*数组元素下标*/>> indexSetByNum = new HashMap<Integer, Set<Integer>>();
+
+        for (int index = 0; index < nums.length; index++) {
+            int num = nums[index];
+            Set<Integer> indexSet = indexSetByNum.get(num);
+
+            if (null == indexSet) {
+                indexSet = new HashSet<Integer>();
+                indexSetByNum.put(num, indexSet);
+            }
+
+            indexSet.add(index);
+        }
+
+        for (int index = 0; index < nums.length; index++) {
+            int numA = nums[index];
+            int numB = target - numA;
+
+            if (indexSetByNum.containsKey(numB)) {
+                Set<Integer> indexSet = indexSetByNum.get(numB);
+                for (int indexB : indexSet) {
+                    if (index != indexB) {
+                        return new int[]{index, indexB};
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * 对solution2的一次优化，将两次hash改为一次hash
+     */
+    public int[] slution3(int[] nums, int target) {
+        if (null == nums || nums.length == 0) {
+            return null;
+        }
+
+        Map<Integer/*数组元素*/, Set<Integer/*数组元素下标*/>> indexSetByNum = new HashMap<Integer, Set<Integer>>();
+
+        for (int index = 0; index < nums.length; index++) {
+            int numA = nums[index];
+
+            int numB = target - numA;
+
+            if (indexSetByNum.containsKey(numB)) {
+                Set<Integer> indexSet = indexSetByNum.get(numB);
+                for (int indexB : indexSet) {
+                    if (index != indexB) {
+                        return new int[]{index, indexB};
+                    }
+                }
+            }
+
+            Set<Integer> indexSet = indexSetByNum.get(numA);
+
+            if (null == indexSet) {
+                indexSet = new HashSet<Integer>();
+                indexSetByNum.put(numA, indexSet);
+            }
+
+            indexSet.add(index);
+        }
+
 
         return null;
     }
