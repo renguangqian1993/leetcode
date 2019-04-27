@@ -21,11 +21,34 @@ package src.main.algorithms.medium;
  */
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode node1 = l1;
+        ListNode node2 = l2;
+        ListNode currNode = dummyHead;
 
-        ListNode listNode = new ListNode(0);
+        int carry = 0;
+
+        while (null != node1 || null != node2) {
+            int val1 = null == node1 ? 0 : node1.val;
+            int val2 = null == node2 ? 0 : node2.val;
+
+            int currVal = carry + val1 + val2;
+
+            currNode.next = new ListNode(currVal % 10);
+
+            currNode = currNode.next;
+
+            carry = currVal / 10;
+
+            node1 = null == node1 || null == node1.next ? null : node1.next;
+            node2 = null == node2 || null == node2.next ? null : node2.next;
+        }
+        if (carry > 0) {
+            currNode.next = new ListNode(carry);
+        }
 
 
-        return listNode;
+        return dummyHead.next;
     }
 
 }
