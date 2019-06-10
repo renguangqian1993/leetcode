@@ -22,7 +22,7 @@ package src.main.algorithms.easy;
  * For the purpose of this problem,
  * assume that your function returns 0 when the reversed integer overflows.
  */
-public class ReverseInteger {
+public class E007_ReverseInteger {
 
     /**
      * reverse by string

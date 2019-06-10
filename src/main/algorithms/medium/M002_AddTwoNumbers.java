@@ -19,7 +19,7 @@ package src.main.algorithms.medium;
  *     ListNode(int x) { val = x; }
  * }
  */
-public class AddTwoNumbers {
+public class M002_AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
         ListNode node1 = l1;
@@ -58,5 +58,14 @@ class ListNode {
     ListNode next;
     ListNode(int x) {
         val = x;
+    }
+
+
+    public int getVal() {
+        return val;
+    }
+
+    public ListNode getNext() {
+        return next;
     }
 }

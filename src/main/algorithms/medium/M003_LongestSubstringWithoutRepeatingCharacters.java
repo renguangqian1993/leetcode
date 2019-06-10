@@ -22,7 +22,7 @@ import java.util.*;
  * Explanation: The answer is "wke", with the length of 3.
  *              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
  */
-public class LongestSubstringWithoutRepeatingCharacters {
+public class M003_LongestSubstringWithoutRepeatingCharacters {
 
     /**
      * Runtime: 110 ms, faster than 9.92% of Java online submissions for Longest Substring Without Repeating Characters.
