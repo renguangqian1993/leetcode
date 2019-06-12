@@ -84,5 +84,32 @@ public class E009_PalindromeInteger {
 
         return result;
     }
+    
+    /**
+     * Runtime: 6 ms, faster than 100.00% of Java online submissions for Palindrome Number.
+     * Memory Usage: 36.2 MB, less than 50.25% of Java online submissions for Palindrome Number.
+     * 时间复杂度：O(log10(n))，对于每次迭代，我们会将输入除以10，因此时间复杂度为 O(log10(n))
+     * 空间复杂度：O(1)。
+     */
+    public boolean isPalindrome3(int x) {
+        if (x < 0) {
+            return false;
+        } else if (x < 10) {
+            return true;
+        } else if (x % 10 == 0) {
+            return false;
+        }
+    
+        int revertedVal = 0;
+        while (x > revertedVal) {
+            revertedVal = revertedVal * 10 + x % 10;
+            x = x / 10;
+        }
+        return (x == revertedVal) || (x == (revertedVal / 10));
+    }
+    
+    public static void main(String[] args) {
+        new E009_PalindromeInteger().isPalindrome3(10);
+    }
 
 }
