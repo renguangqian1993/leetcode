@@ -1,4 +1,4 @@
-package src.main.algorithms.easy;
+package algorithms.easy;
 
 import java.util.HashMap;
 import java.util.HashSet;

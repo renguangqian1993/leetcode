@@ -1,4 +1,4 @@
-package src.main.algorithms.easy;
+package algorithms.easy;
 
 /**
  * Given a 32-bit signed integer, reverse digits of an integer.

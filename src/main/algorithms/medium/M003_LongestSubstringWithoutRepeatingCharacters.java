@@ -1,4 +1,4 @@
-package src.main.algorithms.medium;
+package algorithms.medium;
 
 import java.util.*;
 
