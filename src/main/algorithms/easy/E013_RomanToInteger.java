@@ -51,6 +51,7 @@ public class E013_RomanToInteger {
      * Runtime: 3 ms, faster than 100.00% of Java online submissions for Roman to Integer.
      * Memory Usage: 36.3 MB, less than 99.94% of Java online submissions for Roman to Integer.
      * switch-case解决-_-
+     * 但是有没有可能我写错了，比如有IIV代表8的情况?现在只认为有IV这种
      */
     public int romanToInt(String s) {
         int result = 0;
