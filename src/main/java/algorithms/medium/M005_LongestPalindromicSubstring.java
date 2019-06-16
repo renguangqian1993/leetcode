@@ -17,7 +17,8 @@ public class M005_LongestPalindromicSubstring {
     /**
      * 使用穷举+递归。
      * 由字符串最左最右两边一直往中间缩小。
-     * 最坏情况是O(n^2)的时间复杂度，所以超时了
+     * 最坏情况是O(n^3)的时间复杂度，所以超时了。
+     * 下一步考虑从中心去查找匹配，复杂度是否有所降低？
      */
     public String longestPalindrome(String s) {
         String longestPalindromicStr = "";
@@ -25,7 +26,7 @@ public class M005_LongestPalindromicSubstring {
         for (int indexL = 0; indexL < s.length(); indexL++) {
             for (int indexR = s.length(); indexR > indexL; indexR--) {
                 String tmpStr = s.substring(indexL, indexR);
-                if (judgePalindromeStr(tmpStr) && tmpStr.length() > longestPalindromicStr.length()) {
+                if (judgePalindromeStrByRecurrence(tmpStr) && tmpStr.length() > longestPalindromicStr.length()) {
                     longestPalindromicStr = tmpStr;
 
                     if (longestPalindromicStr.length() >= (s.length() - indexL)) {
@@ -38,11 +39,13 @@ public class M005_LongestPalindromicSubstring {
         }
         return longestPalindromicStr;
     }
+    
+    
 
     /**
      * 判断输入字符串是否是回文字符串，使用递归
      */
-    private boolean judgePalindromeStr(String inputStr) {
+    private boolean judgePalindromeStrByRecurrence(String inputStr) {
         if (inputStr.length() == 0 || inputStr.length() == 1) {
             return true;
         }
@@ -53,12 +56,8 @@ public class M005_LongestPalindromicSubstring {
             return true;
         }
 
-        return judgePalindromeStr(inputStr.substring(1, inputStr.length() - 1));
+        return judgePalindromeStrByRecurrence(inputStr.substring(1, inputStr.length() - 1));
     }
-
-    public static void main(String[] args) {
-        M005_LongestPalindromicSubstring model = new M005_LongestPalindromicSubstring();
-        String str = "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg";
-        System.out.println(model.longestPalindrome(str));
-    }
+    
+    
 }
