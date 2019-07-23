@@ -97,6 +97,40 @@ public class E021_MergeTwoSortedLists {
         }
     }
 
+    /**
+     * 官方解法，迭代法，跟我的解法想法一致，但是代码更加简洁
+     * 时间复杂度：O(n+m) 。因为每次循环迭代中，l1 和 l2 只有一个元素会被放进合并链表中， while 循环的次数等于两个链表的总长度。所有其他工作都是常数级别的，所以总的时间复杂度是线性的。
+     * <p>
+     * 空间复杂度：O(1) 。迭代的过程只会产生几个指针，所以它所需要的空间是常数级别的。
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists3(ListNode l1, ListNode l2) {
+        // maintain an unchanging reference to node ahead of the return node.
+        ListNode prehead = new ListNode(-1);
+
+        ListNode prev = prehead;
+        while (l1 != null && l2 != null) {
+            if (l1.getVal() <= l2.getVal()) {
+                prev.setNext(l1);
+                l1 = l1.getNext();
+            } else {
+                prev.setNext(l2);
+                l2 = l2.getNext();
+            }
+            prev = prev.getNext();
+        }
+
+        // exactly one of l1 and l2 can be non-null at this point, so connect
+        // the non-null list to the end of the merged list.
+        prev.setNext(l1 == null ? l2 : l1);
+
+        return prehead.getNext();
+    }
+
+
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(2);
