@@ -41,7 +41,7 @@ public class E069_Sqrt {
         double indexL = 0D;
         double indexR = x * 2D;
 
-        final double precision = 0.0001D;
+        final double precision = 0.0000000001D;
 
         double decimalVal = 0;
 
@@ -60,8 +60,45 @@ public class E069_Sqrt {
         return (int) decimalVal;
     }
 
+    /**
+     * 验证该方法控制进度最多小数点后12位，否则会陷入死循环
+     * @param x
+     * @return
+     */
+    public static double mySqrt2(int x) {
+        if (x == 0) {
+            return 0;
+        } else if (x == 1) {
+            return 1;
+        }
+
+        double indexL = 0D;
+        double indexR = x * 2D;
+
+        final double precision = 0.00000000001D;
+
+        double decimalVal = 0;
+
+        boolean continueFlag = true;
+        while (continueFlag) {
+            decimalVal = (indexL + indexR) / 2D;
+            if (decimalVal * decimalVal > x) {
+                indexR = decimalVal;
+            } else {
+                indexL = decimalVal;
+            }
+
+            continueFlag = Math.abs((decimalVal * decimalVal) - x) > precision;
+        }
+
+        return decimalVal;
+    }
 
     public static void main(String[] args) {
-        System.out.println(mySqrt(9));
+        for (int index = 1; index <= 10000; index++) {
+            double result = mySqrt2(index);
+            System.out.println((result * result) + " = " + index);
+        }
     }
+
 }
