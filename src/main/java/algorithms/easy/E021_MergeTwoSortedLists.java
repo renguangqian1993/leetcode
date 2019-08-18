@@ -130,48 +130,30 @@ public class E021_MergeTwoSortedLists {
         return prehead.getNext();
     }
 
+    private class ListNode {
+        private int val;
+        private ListNode next;
 
-    public static void main(String[] args) {
-        ListNode l1 = new ListNode(1);
-        ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(4);
-        l1.setNext(l2);
-        l2.setNext(l3);
+        ListNode(int val) {
+            this.val = val;
+        }
 
-        ListNode l4 = new ListNode(1);
-        ListNode l5 = new ListNode(3);
-        ListNode l6 = new ListNode(4);
-        l4.setNext(l5);
-        l5.setNext(l6);
+        public int getVal() {
+            return val;
+        }
 
-        ListNode listNode = new E021_MergeTwoSortedLists().mergeTwoLists2(l1, l4);
+        public void setVal(int val) {
+            this.val = val;
+        }
 
-        System.out.println(listNode);
-    }
+        public ListNode getNext() {
+            return next;
+        }
 
-}
-
-class ListNode {
-    private int val;
-    private ListNode next;
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    public int getVal() {
-        return val;
-    }
-
-    public void setVal(int val) {
-        this.val = val;
-    }
-
-    public ListNode getNext() {
-        return next;
-    }
-
-    public void setNext(ListNode next) {
-        this.next = next;
+        public void setNext(ListNode next) {
+            this.next = next;
+        }
     }
 }
+
+
