@@ -1,5 +1,6 @@
 package algorithms.easy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +21,45 @@ import java.util.List;
  * ]
  */
 public class E107_BinaryTreeLevelOrderTraversal_II {
+    /**
+     * 使用递归，超出时间限制了
+     *
+     * @param root
+     * @return
+     */
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        return null;
+        List<List<Integer>> list = new ArrayList<>();
+        if (null == root) {
+            return list;
+        }
+
+
+        List<List<Integer>> leftList = levelOrderBottom(root.left);
+        List<List<Integer>> rightList = levelOrderBottom(root.right);
+
+        int maxDepth = Math.max(leftList.size(), rightList.size());
+        for (int index = maxDepth - 1; index >= 0; index++) {
+            List<Integer> listOfOneDepth = new ArrayList<>();
+            if (leftList.size() > index) {
+                listOfOneDepth.addAll(leftList.get(index));
+            }
+            if (rightList.size() > index) {
+                listOfOneDepth.addAll(rightList.get(index));
+            }
+
+            list.add(listOfOneDepth);
+        }
+
+
+        list.add(new ArrayList<Integer>() {{
+            add(root.val);
+        }});
+
+        return list;
     }
+
+
+
 
     private class TreeNode {
         int val;
