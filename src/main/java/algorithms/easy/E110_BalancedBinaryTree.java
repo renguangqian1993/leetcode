@@ -37,8 +37,11 @@ package algorithms.easy;
  */
 
 public class E110_BalancedBinaryTree {
+
     /**
-     * 递归，解答错误
+     * 使用递归，从底部往上判断平衡
+     * 执行用时 :2 ms, 在所有 Java 提交中击败了97.15%的用户
+     * 内存消耗 :37.8 MB, 在所有 Java 提交中击败了54.32%的用户
      * @param root
      * @return
      */
@@ -52,7 +55,7 @@ public class E110_BalancedBinaryTree {
     }
 
     private int getDepthIfBalance(TreeNode node) {
-        if (null == null) {
+        if (null == node) {
             return 0;
         }
 
@@ -77,7 +80,7 @@ public class E110_BalancedBinaryTree {
         int val;
         TreeNode left;
         TreeNode right;
-        TreeNode(int x) { val = x; }
+        public TreeNode(int x) { val = x; }
     }
 
 }
