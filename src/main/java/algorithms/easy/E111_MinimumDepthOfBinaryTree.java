@@ -29,6 +29,8 @@ public class E111_MinimumDepthOfBinaryTree {
      * 内存消耗 :40.3 MB, 在所有 Java 提交中击败了5.59%的用户
      *
      * @desciption 自上而下，从左向右遍历，找【左孩子与右孩子同时为null】的最浅的节点
+     * 
+     * @thought 递归会遍历所有的节点，类似于排序中最傻的冒泡排序，如果改用广度优先，是否可以减少遍历次数？
      */
     public int minDepth(TreeNode root) {
         if (null == root) {
