@@ -5,4 +5,18 @@
 	<groupId>com.renguangqian</groupId>
 	<artifactId>leetcode.java</artifactId>
 	<version>0.0.1</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>11</version>
+		</dependency>
+
+	</dependencies>
 </project>
