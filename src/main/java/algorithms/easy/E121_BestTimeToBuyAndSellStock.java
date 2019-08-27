@@ -24,34 +24,53 @@ package algorithms.easy;
  */
 public class E121_BestTimeToBuyAndSellStock {
 
-    public int maxProfit(int[] prices) {
-        if (null == prices || prices.length == 0) {
-            return 0;
-        }
+    public static void main(String[] args) {
+//        int[] prices = new int[]{7,1,5,3,6,4};
+        int[] prices = new int[]{3,3,5,0,0,3,1,4};
 
-        int indexOfMin = 0;
-        int indexOfMax = 0;
-        int indexOfTmpMin = 0;
+        System.out.println(maxProfit(prices));
+    }
 
-        int min = prices[indexOfMin];
-        int max = prices[indexOfMax];
-        int tmpMin = prices[indexOfTmpMin];
+    /**
+     * 暴力法
+     * 双重循环，外层为最大值，里层为最小值，里层下标为0到外层下标
+     * 时间复杂度O(n^2)，空间复杂度O(1)
+     * 执行用时 :586 ms, 在所有 Java 提交中击败了5.01%的用户
+     * 内存消耗 :39.6 MB, 在所有 Java 提交中击败了23.92%的用户
+     */
+    public static int maxProfit(int[] prices) {
+        int maxProfit = 0;
 
-
-        for (int index = 1; index < prices.length; index++) {
-            if (indexOfMax <= indexOfTmpMin) {
-
-            }
-            if (prices[index] > max) {
-                indexOfMax = index;
-                max = prices[indexOfMax];
-
-            } else if (prices[index] < min) {
-                indexOfTmpMin = index;
-                tmpMin = prices[indexOfTmpMin];
+        for (int indexOfMax = 0; indexOfMax < prices.length; indexOfMax++) {
+            for (int indexOfMin = 0; indexOfMin < indexOfMax; indexOfMin++) {
+                if (prices[indexOfMax] - prices[indexOfMin] >= maxProfit) {
+                    maxProfit = prices[indexOfMax] - prices[indexOfMin];
+                }
             }
         }
 
-        return 0;
+        return maxProfit;
+    }
+
+    /**
+     * 遍历一次法
+     * 保存两个变量：最大差值、波谷
+     * 每次得到一个新元素，判断是否波谷；如果不是波谷，判断其与波谷的差值
+     * 执行用时 :2 ms, 在所有 Java 提交中击败了98.30%的用户
+     * 内存消耗 :38.1 MB, 在所有 Java 提交中击败了55.23%的用户
+     */
+    public static int maxProfit2(int[] prices) {
+        int maxProfit = 0;
+        int minPrice = Integer.MAX_VALUE;
+
+        for (int index = 0; index < prices.length; index++) {
+            if (prices[index] < minPrice) {
+                minPrice = prices[index];
+            } else if (prices[index] - minPrice > maxProfit) {
+                maxProfit = prices[index] - minPrice;
+            }
+        }
+
+        return maxProfit;
     }
 }
