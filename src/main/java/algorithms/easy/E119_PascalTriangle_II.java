@@ -1,4 +1,4 @@
-package algorithms.easy.E119;
+package algorithms.easy;
 
 import java.util.ArrayList;
 import java.util.List;
