@@ -138,7 +138,7 @@ public class E136_SingleNumber {
         int indexRC = (indexR + indexC) / 2;
         sort5_1(nums, indexC + 1, indexRC, indexR);
 
-        
+
 
     }
 
