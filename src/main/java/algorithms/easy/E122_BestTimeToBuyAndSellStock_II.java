@@ -30,7 +30,46 @@ package algorithms.easy;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E122_BestTimeToBuyAndSellStock_II {
-    public int maxProfit(int[] prices) {
-        return 0;
+
+    public static void main(String[] args) {
+//        int[] prices = new int[]{7,1,5,3,6,4};
+        int[] prices = new int[]{2,1,4,5,2,9,7};
+//        int[] prices = new int[]{1,2,3,4,5};
+
+        maxProfit(prices);
+    }
+
+    /**
+     * 执行用时 :2 ms, 在所有 Java 提交中击败了97.26%的用户
+     * 内存消耗 :39 MB, 在所有 Java 提交中击败了25.67%的用户
+     * 从左向后遍历，查找到波谷后查找第一个波峰，再查找下一个波谷->波峰。。。
+     * 时间复杂度为O(N)，因需要遍历所有节点一次
+     * 空间复杂度为O(1)，因存储了3个临时变量
+     */
+    public static int maxProfit(int[] prices) {
+        int totalProfit = 0;
+        for (int indexOfMin = 0; indexOfMin < prices.length - 1;) {
+            if (prices[indexOfMin] >= prices[indexOfMin + 1]) {
+                indexOfMin++;
+                continue;
+            }
+
+            int tmpMaxProfit = 0;
+            int indexOfMax = indexOfMin + 1;
+            //此时拿到了波谷下标
+            for (; indexOfMax < prices.length; indexOfMax++) {
+                if ((prices[indexOfMax] - prices[indexOfMin]) < tmpMaxProfit) {
+                    break;
+                } else {
+                    tmpMaxProfit = (prices[indexOfMax] - prices[indexOfMin]);
+
+                }
+
+            }
+            totalProfit += tmpMaxProfit;
+            indexOfMin = indexOfMax;
+        }
+
+        return totalProfit;
     }
 }
