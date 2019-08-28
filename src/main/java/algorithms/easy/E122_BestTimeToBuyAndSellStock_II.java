@@ -32,11 +32,13 @@ package algorithms.easy;
 public class E122_BestTimeToBuyAndSellStock_II {
 
     public static void main(String[] args) {
-//        int[] prices = new int[]{7,1,5,3,6,4};
-        int[] prices = new int[]{2,1,4,5,2,9,7};
-//        int[] prices = new int[]{1,2,3,4,5};
+        int[] prices1 = new int[]{7,1,5,3,6,4};
+        int[] prices2 = new int[]{2,1,4,5,2,9,7};
+        int[] prices3 = new int[]{1,2,3,4,5};
 
-        maxProfit(prices);
+        System.out.println(maxProfit2(prices1) + "===" + maxProfit(prices1));
+        System.out.println(maxProfit2(prices2) + "===" + maxProfit(prices2));
+        System.out.println(maxProfit2(prices3) + "===" + maxProfit(prices3));
     }
 
     /**
@@ -68,6 +70,22 @@ public class E122_BestTimeToBuyAndSellStock_II {
             }
             totalProfit += tmpMaxProfit;
             indexOfMin = indexOfMax;
+        }
+
+        return totalProfit;
+    }
+
+    /**
+     * 执行用时 :2 ms, 在所有 Java 提交中击败了97.22%的用户
+     * 内存消耗 :38 MB, 在所有 Java 提交中击败了38.15%的用户
+     * 参考官方第三种解法
+     */
+    public static int maxProfit2(int[] prices) {
+        int totalProfit = 0;
+        for (int index = 1; index < prices.length; index++) {
+            if (prices[index] > prices[index - 1]) {
+                totalProfit += prices[index] - prices[index - 1];
+            }
         }
 
         return totalProfit;
