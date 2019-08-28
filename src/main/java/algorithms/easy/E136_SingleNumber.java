@@ -1,5 +1,8 @@
 package algorithms.easy;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Given a non-empty array of integers, every element appears twice except for one. Find that single one.
  *
@@ -21,24 +24,54 @@ package algorithms.easy;
  */
 public class E136_SingleNumber {
     /**
+     * 借助set实现，时间复杂度为O(n)，空间复杂度为O(n)
+     */
+    public static int singleNumber(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if (set.contains(num)) {
+                set.remove(num);
+            } else {
+                set.add(num);
+            }
+        }
+
+        return set.toArray(new Integer[]{})[0];
+    }
+
+    /**
      * 将数组排序，从下标0开始找出第一个与其后一个元素不相等的元素
+     *
      * @param nums
      * @return
      */
-    public int singleNumber(int[] nums) {
-        return 0;
+    public static int singleNumber2(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if (set.contains(num)) {
+                set.remove(num);
+            } else {
+                set.add(num);
+            }
+        }
+
+        return set.toArray(new Integer[]{})[0];
     }
 
 
     public static void main(String[] args) {
 
-        int[] nums = new int[]{1,3,5,7,9,2,4,6,8,10,-1};
 
-        sort4(nums);
+        int[] nums = new int[]{4, 1, 2, 1, 2};
+        System.out.println(singleNumber(nums));
 
-        for (int num : nums) {
-            System.out.print(num + " ");
-        }
+//        int[] nums = new int[]{1,3,5,7,9,2,4,6,8,10,-1};
+//
+//        sort4(nums);
+//
+//        for (int num : nums) {
+//            System.out.print(num + " ");
+//        }
     }
 
     /**
