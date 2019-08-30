@@ -46,6 +46,10 @@ public class E155_MinStack {
     }
 
 
+    /**
+     * 执行用时 :142 ms, 在所有 Java 提交中击败了13.39%的用户
+     * 内存消耗 :44.7 MB, 在所有 Java 提交中击败了54.67%的用户
+     */
     private static class MinStack {
 
         //为了瞬时拿到最小值
