@@ -33,11 +33,20 @@ public class E155_MinStack {
 
     public static void main(String[] args) {
 
-        
+        MinStack minStack = new MinStack();
+
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        System.out.println(minStack.getMin());   //--> 返回 -3.
+        minStack.pop();
+        System.out.println(minStack.top());      //--> 返回 0.
+        System.out.println(minStack.getMin());   //--> 返回 -2.
+
     }
 
 
-    private class MinStack {
+    private static class MinStack {
 
         //为了瞬时拿到最小值
         private Map<Integer/*value*/, Integer/*count*/> sortedMap;
@@ -63,9 +72,9 @@ public class E155_MinStack {
             Integer top = stack.pop();
             if (null != top) {
                 if (sortedMap.get(top) == 1) {
-                    sortedMap.put(top, (sortedMap.get(top) - 1));
-                } else {
                     sortedMap.remove(top);
+                } else {
+                    sortedMap.put(top, (sortedMap.get(top) - 1));
                 }
             }
         }
@@ -73,15 +82,9 @@ public class E155_MinStack {
         public int top() {
             Integer top = stack.pop();
             if (null != top) {
-                if (sortedMap.get(top) == 1) {
-                    sortedMap.put(top, (sortedMap.get(top) - 1));
-                } else {
-                    sortedMap.remove(top);
-                }
-
+                stack.push(top);
                 return top;
             }
-
             throw new RuntimeException("栈中元素为空，此操作非法");
         }
 
@@ -91,14 +94,6 @@ public class E155_MinStack {
             if (iterator.hasNext()) {
                 Map.Entry<Integer, Integer> entry = iterator.next();
                 int minVal = entry.getKey();
-                int count = entry.getValue();
-
-                if (count == 1) {
-                    sortedMap.remove(minVal);
-                } else {
-                    sortedMap.put(minVal, (count - 1));
-                }
-
                 return minVal;
             }
             throw new RuntimeException("栈中元素为空，此操作非法");
