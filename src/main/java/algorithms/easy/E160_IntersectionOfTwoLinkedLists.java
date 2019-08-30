@@ -38,9 +38,10 @@ import java.util.*;
 public class E160_IntersectionOfTwoLinkedLists {
 
     /**
+     * 哈希表法
      * 空间换时间，存储两条链表中的一条。然后遍历另一条链表，每个节点用O(1)的时间判断是否存在相同节点
      * 时间复杂度：O(m+n)
-     * 空间复杂度：O(n)
+     * 空间复杂度：O(m)或O(n)
      */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (null == headA || null == headB) {
@@ -67,7 +68,38 @@ public class E160_IntersectionOfTwoLinkedLists {
         return null;
     }
 
-    private class ListNode {
+    /**
+     * TODO 双指针法，该逻辑有误，需要梳理
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        ListNode ha = headA, hb = headB;
+        while (ha != hb) {
+            ha = ha != null ? ha.next : headB;
+            hb = hb != null ? hb.next : headA;
+        }
+        return ha;
+    }
+
+    public static void main(String[] args) {
+        ListNode headA = new ListNode(1);
+        headA.next = new ListNode(2);
+        headA.next.next = new ListNode(3);
+        headA.next.next.next = new ListNode(4);
+        headA.next.next.next.next = new ListNode(5);
+
+
+        ListNode headB = new ListNode(3);
+        headB.next = new ListNode(4);
+        headB.next.next = new ListNode(5);
+        headB.next.next.next = new ListNode(6);
+
+        getIntersectionNode2(headA, headB);
+    }
+
+    private static class ListNode {
         int val;
         ListNode next;
         ListNode(int x) {
