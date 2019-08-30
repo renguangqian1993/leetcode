@@ -1,5 +1,10 @@
 package algorithms.easy;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Stack;
+import java.util.TreeMap;
+
 /**
  * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
  *
@@ -26,26 +31,77 @@ package algorithms.easy;
  */
 public class E155_MinStack {
 
+    public static void main(String[] args) {
+
+        
+    }
+
+
     private class MinStack {
+
+        //为了瞬时拿到最小值
+        private Map<Integer/*value*/, Integer/*count*/> sortedMap;
+        //堆栈
+        private Stack<Integer> stack;
+
         /** initialize your data structure here. */
         public MinStack() {
-
+            sortedMap = new TreeMap<>();
+            stack = new Stack<>();
         }
 
         public void push(int x) {
-
+            stack.push(x);
+            if (sortedMap.containsKey(x)) {
+                sortedMap.put(x, (sortedMap.get(x) + 1));
+            } else {
+                sortedMap.put(x, 1);
+            }
         }
 
         public void pop() {
-
+            Integer top = stack.pop();
+            if (null != top) {
+                if (sortedMap.get(top) == 1) {
+                    sortedMap.put(top, (sortedMap.get(top) - 1));
+                } else {
+                    sortedMap.remove(top);
+                }
+            }
         }
 
         public int top() {
+            Integer top = stack.pop();
+            if (null != top) {
+                if (sortedMap.get(top) == 1) {
+                    sortedMap.put(top, (sortedMap.get(top) - 1));
+                } else {
+                    sortedMap.remove(top);
+                }
 
+                return top;
+            }
+
+            throw new RuntimeException("栈中元素为空，此操作非法");
         }
 
         public int getMin() {
 
+            Iterator<Map.Entry<Integer, Integer>> iterator = sortedMap.entrySet().iterator();
+            if (iterator.hasNext()) {
+                Map.Entry<Integer, Integer> entry = iterator.next();
+                int minVal = entry.getKey();
+                int count = entry.getValue();
+
+                if (count == 1) {
+                    sortedMap.remove(minVal);
+                } else {
+                    sortedMap.put(minVal, (count - 1));
+                }
+
+                return minVal;
+            }
+            throw new RuntimeException("栈中元素为空，此操作非法");
         }
 
         /**
