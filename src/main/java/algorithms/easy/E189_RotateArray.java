@@ -128,7 +128,7 @@ public class E189_RotateArray {
     public static void main(String[] args) {
         int[] nums = new int[]{1,2,3,4,5,6};
 
-        rotate6(nums, 2);
+        rotate7(nums, 2);
     }
 
     /**
@@ -165,4 +165,35 @@ public class E189_RotateArray {
         }
 
     }
+
+    /**
+     * 参考官方【旋转法】的idea
+     * 执行用时 :1 ms, 在所有 Java 提交中击败了99.39%的用户
+     * 内存消耗 :40.4 MB, 在所有 Java 提交中击败了20.03%的用户
+     * 时间复杂度为O(n)，因每个节点遍历了一次
+     * 空间复杂度为O(1)，因没有存储额外数据
+     */
+    public static void rotate7(int[] nums, int k) {
+        k = k % nums.length;
+        //整个数组旋转
+        reverse(nums, 0, nums.length - 1);
+
+        //旋转前k个元素
+        reverse(nums, 0, k - 1);
+
+        //旋转后边元素
+        reverse(nums, k, nums.length - 1);
+
+    }
+
+    private static void reverse(int[] nums, int startIndex, int endIndex) {
+        while (startIndex < endIndex) {
+            int tmp = nums[startIndex];
+            nums[startIndex] = nums[endIndex];
+            nums[endIndex] = tmp;
+            startIndex++;
+            endIndex--;
+        }
+    }
+
 }
