@@ -34,9 +34,24 @@ public class E190_ReverseBits {
 
     //TODO 需要回顾一下位操作相关知识
     // you need treat n as an unsigned value
-    public int reverseBits(int n) {
-        int result = 0;
 
+    /**
+     * 执行用时 :2 ms, 在所有 Java 提交中击败了98.79%的用户
+     * 内存消耗 :30 MB, 在所有 Java 提交中击败了5.27%的用户
+     */
+    public int reverseBits(int n) {
+
+        int result = 0;
+        for (int offset = 0; offset <= 31; offset++) {
+            //offset位移到最右端
+            int low = (n >> offset);
+            //将最低位之外的其他位置零
+            low &= 1;
+            //数据位倒置
+            low = (low << (31 - offset));
+            //结果为0000,取或即可
+            result |= low;
+        }
         return result;
     }
 
