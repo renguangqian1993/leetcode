@@ -103,4 +103,66 @@ public class E189_RotateArray {
             nums[index] = stack.pop();
         }
     }
+
+    /**
+     * 官方解法【使用环状替换】
+     */
+    public static void rotate5(int[] nums, int k) {
+        k = k % nums.length;
+        int count = 0;
+        for (int start = 0; count < nums.length; start++) {
+            int current = start;
+            int prev = nums[start];
+            do {
+                int next = (current + k) % nums.length;
+                int temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            } while (start != current);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{1,2,3,4,5,6};
+
+        rotate6(nums, 2);
+    }
+
+    /**
+     * 参考官方【使用环状替换】法
+     * 时间复杂度为O(n)，因每个节点只遍历了一次
+     * 空间复杂度为O(1)，因存储了固定的额外数据
+     * 执行用时 :1 ms, 在所有 Java 提交中击败了99.39%的用户
+     * 内存消耗 :39.2 MB, 在所有 Java 提交中击败了24.85%的用户
+     */
+    public static void rotate6(int[] nums, int k) {
+        k = k % nums.length;
+        if (k == 0) {
+            return;
+        }
+
+        int count = 0;
+
+        //这一层for循环是因为，有可能(startIndex + n * k) % nums.length == startIndex，
+        // 即按照偏移量偏移形成环，完成一圈替换后需要重新开始一个‘环’
+        for (int startIndex = 0; count < nums.length; startIndex++) {
+            int currentIndex = startIndex;
+
+            int preVal = nums[currentIndex];
+
+            do {
+                currentIndex = (currentIndex + k) % nums.length;
+                int tmpVal = nums[currentIndex];
+
+                nums[currentIndex] = preVal;
+                preVal = tmpVal;
+
+                count++;
+            } while (currentIndex != startIndex);
+        }
+
+    }
 }
