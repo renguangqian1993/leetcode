@@ -1,5 +1,7 @@
 package algorithms.easy;
 
+import java.util.Stack;
+
 /**
  * Given an array, rotate the array to the right by k steps, where k is non-negative.
  *
@@ -76,6 +78,29 @@ public class E189_RotateArray {
                 nums[index] = nums[index - 1];
             }
             nums[0] = tmp;
+        }
+    }
+
+    /**
+     * 使用堆栈存放需要前移的元素，然后将前边元素后移，然后将堆栈元素放入
+     * 时间复杂度：O(n)，需要遍历所有元素一次 + 前移元素一次
+     * 空间复杂度：O(k)
+     * 执行用时 :7 ms, 在所有 Java 提交中击败了36.39%的用户
+     * 内存消耗 :40 MB, 在所有 Java 提交中击败了20.91%的用户
+     */
+    public static void rotate4(int[] nums, int k) {
+        k = k % nums.length;
+        Stack<Integer> stack = new Stack<>();
+        for (int index = nums.length - 1; index >= nums.length - k; index--) {
+            stack.push(nums[index]);
+        }
+
+        for (int index = nums.length - 1 - k; index >= 0; index--) {
+            nums[index + k] = nums[index];
+        }
+
+        for (int index = 0; index < k; index++) {
+            nums[index] = stack.pop();
         }
     }
 }
