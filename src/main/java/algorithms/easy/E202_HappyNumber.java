@@ -40,12 +40,7 @@ public class E202_HappyNumber {
             if (1 == n) {
                 return true;
             } else {
-                int tmpN = 0;
-                while (n != 0) {
-                    tmpN += Math.pow((n % 10), 2);
-                    n /= 10;
-                }
-                n = tmpN;
+                n = getPowResult(n);
 
                 if (set.contains(n)) {
                     return false;
@@ -55,5 +50,34 @@ public class E202_HappyNumber {
             }
         }
 
+    }
+
+    /**
+     * 双指针法，快节点每次走两步，慢节点每次走一步，当两个节点相同时，说明已经出现了循环，判断当前结果是否为1即可
+     * 执行用时 :4 ms, 在所有 Java 提交中击败了75.51%的用户
+     * 内存消耗 :33.7 MB, 在所有 Java 提交中击败了27.10%的用户
+     */
+    public static boolean isHappy2(int n) {
+        int fastNode = n;
+        int slowNode = n;
+        while (true) {
+
+            fastNode = getPowResult(fastNode);
+            fastNode = getPowResult(fastNode);
+
+            slowNode = getPowResult(slowNode);
+            if (slowNode == fastNode) {
+                return fastNode == 1;
+            }
+        }
+    }
+
+    private static int getPowResult(int n) {
+        int result = 0;
+        while (n != 0) {
+            result += Math.pow((n % 10), 2);
+            n /= 10;
+        }
+        return result;
     }
 }
