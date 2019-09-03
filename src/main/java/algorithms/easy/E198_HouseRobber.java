@@ -22,11 +22,22 @@ package algorithms.easy;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E198_HouseRobber {
-    /**
-     * 
-     */
-    public int rob(int[] nums) {
+    public static void main(String[] args) {
+        int[] nums = new int[]{1,2,3,4,5,6,7,8,9};
+        rob(nums);
+    }
 
-        return 0;
+    /**
+     * TODO 官方解法，动态规划
+     */
+    public static int rob(int[] nums) {
+        int prevMax = 0;
+        int currMax = 0;
+         for (int x : nums) {
+            int temp = currMax;
+            currMax = Math.max(prevMax + x, currMax);
+            prevMax = temp;
+        }
+        return currMax;
     }
 }
