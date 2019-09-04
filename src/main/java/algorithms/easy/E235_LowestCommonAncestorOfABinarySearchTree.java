@@ -47,7 +47,44 @@ public class E235_LowestCommonAncestorOfABinarySearchTree {
     }
 
     /**
+     * 迭代法
+     * 执行用时 :11 ms, 在所有 Java 提交中击败了72.21%的用户
+     * 内存消耗 :42 MB, 在所有 Java 提交中击败了5.03%的用户
+     */
+    public static TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+
+        while (true) {
+            if (root.val > p.val && root.val > q.val) {
+                root = root.left;
+            } else if (root.val < p.val && root.val < q.val) {
+                root = root.right;
+            } else {
+                break;
+            }
+        }
+
+        return root;
+    }
+
+    /**
+     * 递归法，不判断叶子节点合法性
+     * 执行用时 :11 ms, 在所有 Java 提交中击败了72.21%的用户
+     * 内存消耗 :40.8 MB, 在所有 Java 提交中击败了20.04%的用户
+     */
+    public static TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+
+        if (root.val < p.val && root.val < q.val) {
+            return lowestCommonAncestor2(root.right, p, q);
+        } else if (root.val > p.val && root.val > q.val) {
+            return lowestCommonAncestor2(root.left, p, q);
+        }
+
+        return root;
+    }
+
+    /**
      * 递归，查找包含两个叶子节点的最小节点
+     * 与官方解法的区别，官方解法未进行合法性判断，即直接比大小，而非精确查找叶子节点的位置
      * 执行用时 :11 ms, 在所有 Java 提交中击败了72.21%的用户
      * 内存消耗 :41.2 MB, 在所有 Java 提交中击败了6.49%的用户
      */
