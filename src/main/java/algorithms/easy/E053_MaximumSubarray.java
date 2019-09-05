@@ -13,7 +13,7 @@ package algorithms.easy;
  * 链接：https://leetcode-cn.com/problems/maximum-subarray
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class E53_MaximumSubarray {
+public class E053_MaximumSubarray {
     //TODO 动态规划，分治法
     public int maxSubArray(int[] nums) {
         int ans = nums[0];
@@ -77,6 +77,30 @@ public class E53_MaximumSubarray {
         }
         return leftSum + rightSum;
 
+    }
+
+
+    /**
+     * 动态规划
+     * 执行用时 :2 ms, 在所有 Java 提交中击败了90.86%的用户
+     * 内存消耗 :38.9 MB, 在所有 Java 提交中击败了80.30%的用户
+     */
+    public int maxSubArray3(int[] nums) {
+        int maxSum = Integer.MIN_VALUE;
+
+        int tmpSum = 0;
+
+        for (int num : nums) {
+            if (tmpSum > 0) {
+                tmpSum += num;
+            } else {
+                tmpSum = num;
+            }
+
+            maxSum = Math.max(maxSum, tmpSum);
+        }
+
+        return maxSum;
     }
 
 }
