@@ -1,7 +1,10 @@
 package algorithms.easy;
 
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Given a binary tree, return all root-to-leaf paths.
@@ -49,6 +52,42 @@ public class E257_BinaryTreePaths {
             getPath(prefix + "->" + node.val, node.left, pathList);
             getPath(prefix + "->" + node.val, node.right, pathList);
         }
+    }
+
+    /**
+     * 时间复杂度为O(n)，空间复杂度为O(n)
+     * 执行用时 :7 ms, 在所有 Java 提交中击败了6.79%的用户
+     * 内存消耗 :36.7 MB, 在所有 Java 提交中击败了97.17%的用户
+     */
+    public List<String> binaryTreePaths2(TreeNode root) {
+        List<String> pathList = new ArrayList<>();
+        if (null == root) {
+            return pathList;
+        }
+
+        Stack<Pair<TreeNode, String>> stack = new Stack<>();
+        stack.push(new Pair<>(root, String.valueOf(root.val)));
+
+        while (!stack.isEmpty()) {
+            Pair<TreeNode, String> pair = stack.pop();
+            TreeNode node = pair.getKey();
+            String path = pair.getValue();
+
+            if (null == node.left && null == node.right) {
+                pathList.add(path);
+            } else {
+                path += "->";
+
+                if (null != node.right) {
+                    stack.push(new Pair<>(node.right, path + node.right.val));
+                }
+                if (null != node.left) {
+                    stack.push(new Pair<>(node.left, path + node.left.val));
+                }
+            }
+        }
+
+        return pathList;
     }
 
     private class TreeNode {
