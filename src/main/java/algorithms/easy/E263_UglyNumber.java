@@ -30,10 +30,28 @@ package algorithms.easy;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E263_UglyNumber {
+    /**
+     * 执行用时 :3 ms, 在所有 Java 提交中击败了85.58%的用户
+     * 内存消耗 :34.1 MB, 在所有 Java 提交中击败了12.26%的用户
+     */
     public boolean isUgly(int num) {
+        if (num == 1) {
+            return true;
+        }
+        while (num > 0) {
+            if (num == 2 || num == 3 || num == 5) {
+                return true;
+            } else if (num % 2 == 0) {
+                num /= 2;
+            } else if (num % 3 == 0) {
+                num /= 3;
+            } else if (num % 5== 0) {
+                num /= 5;
+            } else {
+                return false;
+            }
+        }
 
-        return ((num & 2) == 2 && (num & 1 ^ 1)  == 0)
-                || ((num & 3) == 3)
-                || (num & 5) == 5;
+        return false;
     }
 }
