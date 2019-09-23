@@ -41,4 +41,21 @@ public class E283_MoveZeroes {
             nums[index] = 0;
         }
     }
+
+    /**
+     * 对第一种解法的优化，第一种解法需要对所有节点进行写入
+     * @param nums
+     */
+    public static void moveZeroes2(int[] nums) {
+        int countOfZero = 0;
+
+        for (int index = 0; index < nums.length; index++) {
+            if (nums[index] == 0) {
+                countOfZero++;
+            } else if (countOfZero > 0){
+                nums[index - countOfZero] = nums[index];
+                nums[index] = 0;
+            }
+        }
+    }
 }
