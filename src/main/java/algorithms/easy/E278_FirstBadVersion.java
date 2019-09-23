@@ -29,39 +29,41 @@ public class E278_FirstBadVersion {
         Solution solution = new Solution();
         solution.firstBadVersion(2126753390);
     }
-}
 
-class Solution extends VersionControl {
-    /**
-     * 二分法，注意int约界
-     * 执行用时 :12 ms, 在所有 Java 提交中击败了99.87%的用户
-     * 内存消耗 :33 MB, 在所有 Java 提交中击败了67.69%的用户
-     */
-    public int firstBadVersion(int n) {
-        int indexL = 0;
-        int indexR = n;
-        while (indexL <= indexR) {
-            if (indexL == indexR) {
-                return indexL;
+    private static class Solution extends VersionControl {
+        /**
+         * 二分法，注意int约界
+         * 执行用时 :12 ms, 在所有 Java 提交中击败了99.87%的用户
+         * 内存消耗 :33 MB, 在所有 Java 提交中击败了67.69%的用户
+         */
+        public int firstBadVersion(int n) {
+            int indexL = 0;
+            int indexR = n;
+            while (indexL <= indexR) {
+                if (indexL == indexR) {
+                    return indexL;
+                }
+
+                int index = (int) (indexL / 2.0D + indexR / 2.0D);
+                boolean badVersion = this.isBadVersion(index);
+
+                if (badVersion) {
+                    indexR = index;
+                } else {
+                    indexL = index + 1;
+                }
             }
-
-            int index = (int) (indexL / 2.0D + indexR / 2.0D);
-            boolean badVersion = this.isBadVersion(index);
-
-            if (badVersion) {
-                indexR = index;
-            } else {
-                indexL = index + 1;
+            return 0;
+        }
+    }
+    private static class VersionControl {
+        boolean isBadVersion(int version) {
+            if (version >= 1702766719) {
+                return true;
             }
+            return false;
         }
-        return 0;
     }
+
 }
-class VersionControl {
-    boolean isBadVersion(int version) {
-        if (version >= 1702766719) {
-            return true;
-        }
-        return false;
-    }
-}
+
