@@ -54,9 +54,14 @@ public class E326_PowerOfThree {
 
     /**
      * maxPow是Integer.MAX_VALUE范围内，最大的3的幂，是否应该通过程序去计算得到而不是写死呢
+     * 这种方法，n必须为质数
      */
-    public boolean isPowerOfThree3(int n) {
+    public static boolean isPowerOfThree3(int n) {
         int maxPow = (int) Math.pow(3.0D, 19.0D);
         return n > 0 && maxPow % n == 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPowerOfThree3(6));
     }
 }
