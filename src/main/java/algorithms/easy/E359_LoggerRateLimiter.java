@@ -1,5 +1,8 @@
 package algorithms.easy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Design a logger system that receive stream of messages along with its timestamps,
  * each message should be printed if and only if it is not printed in the last 10 seconds.
@@ -39,9 +42,10 @@ package algorithms.easy;
 public class E359_LoggerRateLimiter {
     private class Logger {
 
+        Map<String, Integer> map;
         /** Initialize your data structure here. */
         public Logger() {
-
+            map = new HashMap<>();
         }
 
         /** Returns true if the message should be printed in the given timestamp,
@@ -49,7 +53,12 @@ public class E359_LoggerRateLimiter {
          If this method returns false, the message will not be printed.
          The timestamp is in seconds granularity. */
         public boolean shouldPrintMessage(int timestamp, String message) {
+            if (map.containsKey(message) && (timestamp - map.get(message) < 10)) {
+                return false;
+            }
 
+            map.put(message, timestamp);
+            return true;
         }
     }
 
