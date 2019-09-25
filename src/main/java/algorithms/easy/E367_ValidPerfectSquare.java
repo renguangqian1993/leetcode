@@ -49,6 +49,12 @@ public class E367_ValidPerfectSquare {
         return false;
     }
 
+    /**
+     * 数学归纳法
+     * n^2 = 1 + 3 + ... + (2n-1)
+     * @param num
+     * @return
+     */
     public static boolean isPerfectSquare2(int num) {
         int index = 1;
         while (num > 0) {
@@ -57,5 +63,21 @@ public class E367_ValidPerfectSquare {
         }
 
         return num == 0;
+    }
+
+    /**
+     * 牛顿迭代法，TODO
+     * f(X(n+1)) = X(n) - (f(X(n)) / f'(X(n)))
+     */
+    public static boolean isPerfaceSquare3(int num) {
+        if(1 == num) {
+            return true;
+        }
+        int sqrt = num / 2;
+        while((double)sqrt * sqrt > num){
+            sqrt = (sqrt + num / sqrt) / 2;
+        }
+
+        return sqrt * sqrt == num;
     }
 }
