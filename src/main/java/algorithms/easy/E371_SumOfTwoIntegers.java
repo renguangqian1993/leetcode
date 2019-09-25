@@ -17,7 +17,22 @@ package algorithms.easy;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E371_SumOfTwoIntegers {
-    public int getSum(int a, int b) {
-        return 0;
+
+    public static void main(String[] args) {
+        getSum(1, 3);
+    }
+
+    public static int getSum(int a, int b) {
+        //保留不进位的数据
+        int result = a ^ b;
+        //进位的数据
+        int carry = (a & b) << 1;
+        while (carry != 0) {
+            int tmpCarry = (result & carry) << 1;
+            result ^= carry;
+            carry = tmpCarry;
+        }
+
+        return result;
     }
 }
