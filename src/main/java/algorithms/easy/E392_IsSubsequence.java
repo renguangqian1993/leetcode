@@ -43,18 +43,12 @@ public class E392_IsSubsequence {
         if (s.length() > t.length()) {
             return false;
         }
-        int fastIndex = 0;
-        int slowIndex = 0;
-        for (; slowIndex < s.length(); slowIndex++) {
-            boolean matchedOnChar = false;
-            for (; fastIndex < t.length(); fastIndex++) {
-                if (s.charAt(slowIndex) == t.charAt(fastIndex)) {
-                    matchedOnChar = true;
-                    fastIndex++;
-                    break;
-                }
-            }
-            if (!matchedOnChar) {
+
+        int fastIndex = -1;
+
+        for (int slowIndex = 0; slowIndex < s.length(); slowIndex++) {
+            fastIndex = t.indexOf(s.charAt(slowIndex), fastIndex + 1);
+            if (fastIndex == -1) {
                 return false;
             }
         }
