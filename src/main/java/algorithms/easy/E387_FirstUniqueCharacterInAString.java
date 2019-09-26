@@ -19,6 +19,18 @@ package algorithms.easy;
  */
 public class E387_FirstUniqueCharacterInAString {
     public int firstUniqChar(String s) {
+        int[] count = new int[26];
+        char[] charArray = s.toCharArray();
+        for (int index = 0; index < charArray.length; index++) {
+            count[charArray[index] - 'a']++;
+        }
 
+        for (int index = 0; index < charArray.length; index++) {
+            if (count[charArray[index] - 'a'] == 1) {
+                return index;
+            }
+        }
+
+        return -1;
     }
 }
