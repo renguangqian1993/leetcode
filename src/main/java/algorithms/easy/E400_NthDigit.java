@@ -26,17 +26,40 @@ package algorithms.easy;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E400_NthDigit {
-    public int findNthDigit(int n) {
-        //当前处于几位数
-        int carry = 0;
-        //统计数字位个数
-        int countOfNum = 0;
-        while (countOfNum < n) {
-            carry++;
 
-            countOfNum += Math.pow(10.0D, carry - 1) * 9 * carry;
+    public static void main(String[] args) {
+        for (int index = 1; index <= 200; index++) {
+            System.out.println(index + " : " + findNthDigit(index));
         }
-        return 0;
+
+    }
+
+    /**
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 32.8 MB
+     * , 在所有 Java 提交中击败了
+     * 80.00%
+     * 的用户
+     */
+    public static int findNthDigit(int numInput) {
+        //当前区间为几位数
+        int carry = 1;
+        //记录当前区间之前区间位数和
+        double sumOfDight = 0;
+        while (sumOfDight + Math.pow(10.0D, carry - 1) * 9 * carry < numInput) {
+
+            sumOfDight += Math.pow(10.0D, carry - 1) * 9 * carry;
+            carry++;
+        }
+
+        int num = (int) (Math.pow(10.0D, carry - 1) + (numInput - sumOfDight - 1) / carry);
+
+        return String.valueOf(num).charAt((int) ((numInput - sumOfDight - 1) % carry)) - '0';
     }
 
 
