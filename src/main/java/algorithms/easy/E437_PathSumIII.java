@@ -32,8 +32,39 @@ package algorithms.easy;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E437_PathSumIII {
+    /**
+     * TODO
+     *
+     * @param root
+     * @param sum
+     * @return
+     */
     public int pathSum(TreeNode root, int sum) {
-        return 0;
+        if (null == root) {
+            return 0;
+        }
+
+        return paths(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+    }
+
+    /**
+     * 求某个节点开始，连续链路和=sum的数量
+     *
+     * @param root
+     * @param sum
+     * @return
+     */
+    public int paths(TreeNode root, int sum) {
+        if (null == root) {
+            return 0;
+        }
+
+        int count = 0;
+        if (root.val == sum) {
+            count++;
+        }
+
+        return count + paths(root.left, sum - root.val) + paths(root.right, sum - root.val);
     }
 
     private class TreeNode {
