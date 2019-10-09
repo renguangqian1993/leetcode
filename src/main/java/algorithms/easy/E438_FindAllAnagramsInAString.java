@@ -1,5 +1,6 @@
 package algorithms.easy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +40,39 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E438_FindAllAnagramsInAString {
-    public List<Integer> findAnagrams(String s, String p) {
-        return null;
+    /**
+     * 暴力法
+     * 时间复杂度为O(m * n)
+     * 空间复杂度为O(1)
+     * TODO 滑动窗口
+     */
+    public static List<Integer> findAnagrams(String s, String p) {
+        List<Integer> indexList = new ArrayList<>();
+        if (null == s || s.isEmpty() || null == p || p.isEmpty() || s.length() < p.length()) {
+            return indexList;
+        }
+
+        for (int index = 0; index < s.length() - p.length(); index++) {
+            int[] countMap = new int[26];
+            for (char charTmp : p.toCharArray()) {
+                countMap[charTmp - 'a']++;
+            }
+
+            for (int shortIndex = index; shortIndex < index + p.length(); shortIndex++) {
+                countMap[s.charAt(shortIndex) - 'a']--;
+            }
+
+            boolean matched = true;
+            for (int count : countMap) {
+                if (count != 0) {
+                    matched = false;
+                    break;
+                }
+            }
+            if (matched) {
+                indexList.add(index);
+            }
+        }
+        return indexList;
     }
 }
