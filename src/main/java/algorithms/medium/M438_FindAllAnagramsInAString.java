@@ -1,4 +1,4 @@
-package algorithms.easy;
+package algorithms.medium;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ import java.util.List;
  * 链接：https://leetcode-cn.com/problems/find-all-anagrams-in-a-string
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class E438_FindAllAnagramsInAString {
+public class M438_FindAllAnagramsInAString {
     /**
      * 暴力法
      * 时间复杂度为O(m * n)

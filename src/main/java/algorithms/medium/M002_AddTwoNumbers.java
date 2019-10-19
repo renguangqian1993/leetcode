@@ -51,21 +51,23 @@ public class M002_AddTwoNumbers {
         return dummyHead.next;
     }
 
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+
+
+        public int getVal() {
+            return val;
+        }
+
+        public ListNode getNext() {
+            return next;
+        }
+    }
 }
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-    }
 
-
-    public int getVal() {
-        return val;
-    }
-
-    public ListNode getNext() {
-        return next;
-    }
-}
