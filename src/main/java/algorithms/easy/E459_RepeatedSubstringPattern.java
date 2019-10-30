@@ -33,6 +33,8 @@ package algorithms.easy;
 public class E459_RepeatedSubstringPattern {
     //TODO 减枝算法了解一下
     public boolean repeatedSubstringPattern(String s) {
-        return false;
+        //s  : abab
+        //s+s: abababab = a + b + abab + a + b = ab + s + ab
+        return (s + s).substring(1, s.length() * 2 - 1).contains(s);
     }
 }
