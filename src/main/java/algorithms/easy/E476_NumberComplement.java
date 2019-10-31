@@ -31,8 +31,6 @@ public class E476_NumberComplement {
 
     /**
      * 对每一位的数与1进行异或运算得到相反的数，然后左移若干位，与结果进行或运算
-     * @param num
-     * @return
      */
     public static int findComplement(int num) {
         int complement = 0;
@@ -45,4 +43,17 @@ public class E476_NumberComplement {
         return complement;
     }
 
+    /**
+     * @idea 对二进制最高位往下全部置1,然后与输入进行异或运算
+     */
+    public static int findComplement2(int num) {
+        int tmpNum = num;
+        int index = 0;
+        while (tmpNum != 0) {
+            index++;
+            tmpNum >>= 1;
+        }
+
+        return ((int) (Math.pow(2, index) - 1)) ^ num;
+    }
 }
