@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds" packagingData="true">
+<!--    scan: 新建一个ReconfigureOnChangeTask任务用于监视配置文件是否变化，也会自动监视外部文件的变化。默认1分钟-->
+<!--    scanPeriod: 自动扫描周期-->
+
+<!--    packagingData 会在堆栈的每一行显示jar包的名字以及jar的版本号-->
+
+<!--    设置 debug="true" 完全等同于配置一个 OnConsoleStatusListene-->
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
