@@ -55,7 +55,7 @@ public class E020_ValidParentheses {
         char[] chars = s.toCharArray();
         for (char charTmp : chars) {
             if (charTmp == ')') {
-                if (stack.isEmpty()) {
+                if (stack.isEmpty() ) {
                     return false;
                 } else {
                     char charPre = stack.pop();
