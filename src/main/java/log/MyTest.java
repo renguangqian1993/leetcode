@@ -4,6 +4,9 @@ import ch.qos.logback.classic.util.ContextInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyTest {
 
     static {
@@ -15,11 +18,23 @@ public class MyTest {
 //        LoggerContext lc = (LoggerContext)LoggerFactory.getILoggerFactory();
 //        StatusPrinter.print(lc);
 
-        Logger logger = LoggerFactory.getLogger(MyTest.class);
-        logger.error("error级别");
-        logger.warn("warn级别");
-        logger.info("info级别");
-        logger.debug("debug级别");
+//        Logger logger = LoggerFactory.getLogger(MyTest.class);
+//        logger.error("error级别");
+//        logger.warn("warn级别");
+//        logger.info("info级别");
+//        logger.debug("debug级别");
+        int HASH_INCREMENT = 0x61c88647;
+        int s = 0;
+        double n = 4;
+        int Max = (int) Math.pow(2, n);
+
+        List<Integer> list = new ArrayList<>();
+        for(int i=s; i<Max+s; i++){
+            int hash = i*HASH_INCREMENT & (Max-1);
+
+          System.out.println(hash + " duplicate: " + list.contains(hash));
+            list.add(hash);
+        }
     }
 }
 
