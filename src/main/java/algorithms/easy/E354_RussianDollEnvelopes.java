@@ -1,4 +1,4 @@
-package algorithms.medium;
+package algorithms.easy;
 
 import java.util.Arrays;
 import java.util.Comparator;
