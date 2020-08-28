@@ -25,7 +25,7 @@ import java.util.Objects;
  * 链接：https://leetcode-cn.com/problems/rotate-list
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class M61_rotate_list {
+public class M061_rotate_list {
     public ListNode rotateRight(ListNode head, int k) {
         if (Objects.isNull(head)) {
             return head;
