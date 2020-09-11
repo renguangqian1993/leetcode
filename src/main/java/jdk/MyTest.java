@@ -26,7 +26,25 @@ public class MyTest {
     public static void main(String[] args) throws Exception {
 //        System.out.println(ClassLayout.parseInstance(a).toPrintable());
 
+        Child child = new Child();
+        Father father = new Father();
+
     }
 
-
+    private static class Father {
+        static {
+            System.out.println("Father static");
+        }
+        public Father() {
+            System.out.println("Father constructor");
+        }
+    }
+    private static class Child extends Father {
+        static {
+            System.out.println("Child static");
+        }
+        public Child() {
+            System.out.println("Child constructor");
+        }
+    }
 }

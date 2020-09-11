@@ -2,7 +2,7 @@ package jdk;
 
 import java.util.Objects;
 
-public class Main {
+public class ReverseListTest {
 
     public static void main(String[] args) {
 //        reverseNode();
