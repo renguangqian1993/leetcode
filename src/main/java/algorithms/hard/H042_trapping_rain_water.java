@@ -68,9 +68,7 @@ public class H042_trapping_rain_water {
                 int maxLeft = leftArray[index];
                 int maxRight = rightArray[index];
                 int minMax = Math.min(maxLeft, maxRight);
-                if (minMax > height[index]) {
-                    result += (minMax - height[index]);
-                }
+                result += (minMax - height[index]);
             }
             return result;
         }
