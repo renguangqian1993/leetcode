@@ -50,20 +50,33 @@ import java.util.Stack;
 public class E1021_remove_outermost_parentheses {
     private class Solution {
         public String removeOuterParentheses(String S) {
-            Stack<Character> stack = new Stack<>();
+            StringBuilder buffer = new StringBuilder();
+
             char[] charArray = S.toCharArray();
-            int countToMatch = 0;
+            int countToMatch = 0;//需要匹配的左括号
+            boolean flag = false;
             for (int index = 0; index < charArray.length; index++) {
                 if ('(' == charArray[index]) {
-                    if (countToMatch == 0) {
-                        stack.push(charArray[index]);
-                    } else {
+                    //左括号
+                    if (!flag) {
+                        //忽略第一个左括号
+                        flag = true;
+                        continue;
                     }
+                    buffer.append('(');
+                    countToMatch++;
                 } else {
-                    //
+                    //右括号
+                    if (countToMatch == 0) {
+                        //忽略【第一个左括号】配对的右括号
+                        flag = false;
+                        continue;
+                    }
+                    buffer.append(')');
+                    countToMatch--;
                 }
             }
-            return null;
+            return buffer.toString();
         }
     }
 }
