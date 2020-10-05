@@ -1,6 +1,7 @@
 package algorithms.medium;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +34,11 @@ import java.util.Stack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class M018_4sum {
+    /**
+     * 超时了，逻辑没错，栈+递归
+     [-497,-494,-484,-477,-453,-453,-444,-442,-428,-420,-401,-393,-392,-381,-357,-357,-327,-323,-306,-285,-284,-263,-262,-254,-243,-234,-208,-170,-166,-162,-158,-136,-133,-130,-119,-114,-101,-100,-86,-66,-65,-6,1,3,4,11,69,77,78,107,108,108,121,123,136,137,151,153,155,166,170,175,179,211,230,251,255,266,288,306,308,310,314,321,322,331,333,334,347,349,356,357,360,361,361,367,375,378,387,387,408,414,421,435,439,440,441,470,492]
+     1682
+     */
     private class SolutionByStack {
 
         private List<List<Integer>> lists = new ArrayList<>();
@@ -83,6 +89,62 @@ public class M018_4sum {
             }
 
             return list;
+        }
+    }
+    //TODO
+    private class SolutionByLeetCode {
+        public List<List<Integer>> fourSum(int[] nums, int target) {
+            List<List<Integer>> quadruplets = new ArrayList<List<Integer>>();
+            if (nums == null || nums.length < 4) {
+                return quadruplets;
+            }
+            Arrays.sort(nums);
+            int length = nums.length;
+            for (int i = 0; i < length - 3; i++) {
+                if (i > 0 && nums[i] == nums[i - 1]) {
+                    //当前index与前一位相等，index后移
+                    continue;
+                }
+                if (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) {
+                    //当前index开始，四位，sum值大于target，break
+                    break;
+                }
+                if (nums[i] + nums[length - 3] + nums[length - 2] + nums[length - 1] < target) {
+                    //当前index开始，四位，sum值小于target，index后移
+                    continue;
+                }
+                for (int j = i + 1; j < length - 2; j++) {
+                    if (j > i + 1 && nums[j] == nums[j - 1]) {
+                        continue;
+                    }
+                    if (nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) {
+                        break;
+                    }
+                    if (nums[i] + nums[j] + nums[length - 2] + nums[length - 1] < target) {
+                        continue;
+                    }
+                    int left = j + 1, right = length - 1;
+                    while (left < right) {
+                        int sum = nums[i] + nums[j] + nums[left] + nums[right];
+                        if (sum == target) {
+                            quadruplets.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                            while (left < right && nums[left] == nums[left + 1]) {
+                                left++;
+                            }
+                            left++;
+                            while (left < right && nums[right] == nums[right - 1]) {
+                                right--;
+                            }
+                            right--;
+                        } else if (sum < target) {
+                            left++;
+                        } else {
+                            right--;
+                        }
+                    }
+                }
+            }
+            return quadruplets;
         }
     }
 }
