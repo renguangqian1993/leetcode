@@ -69,10 +69,60 @@ public class M1003_check_if_word_is_valid_after_substitutions {
         }
 
         private void dealStack() {
-            if (stack.isEmpty()) {
+            if (stack.isEmpty() || 'a' != stack.peek()) {
+                //第一位不是a，跳出去让上一层处理
+                //栈空，直接跳出去
                 return;
             }
 
+            //a出栈
+            stack.pop();
+
+            //a出栈后为空，a还原并跳出
+            if (stack.isEmpty()) {
+                stack.push('a');
+                return;
+            }
+
+            //栈顶不为b，递归处理后边的字符
+            if ('b' != stack.peek()) {
+                dealStack();
+            }
+
+            //栈空，或者后边字符不为b，则不匹配，a重新入栈并返回
+            if (stack.isEmpty() || 'b' != stack.peek()) {
+                stack.push('a');
+                return;
+            }
+
+            //b出栈
+            stack.pop();
+            //栈空，缺少c，a,b入栈并返回
+            if (stack.isEmpty()) {
+                stack.push('b');
+                stack.push('a');
+                return;
+            }
+
+            //栈顶不为c，递归处理后边字符
+            if ('c' != stack.peek()) {
+                dealStack();
+            }
+
+            //栈空即缺c或栈顶不为c，a,b入栈并返回
+            if (stack.isEmpty() || 'c' != stack.peek()) {
+                stack.push('b');
+                stack.push('a');
+                return;
+            }
+
+            //c出栈，此时处理完一个字符串
+            stack.pop();
+
+            //栈非空，判断后边的字符
+            if (!stack.isEmpty()) {
+                dealStack();
+            }
 
         }
     }
