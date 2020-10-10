@@ -1,5 +1,9 @@
 package algorithms.medium;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * 1019. 链表中的下一个更大节点
  *
@@ -39,9 +43,67 @@ package algorithms.medium;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class M1019_next_greater_node_in_linked_list {
-    private class Solution {
+
+    /**
+     * 1.数据读取到list
+     * 2.两层for循环
+     *
+     * 时间复杂度：O(N^2)
+     * 空间复杂度：O(N)
+     */
+    private class Solution1 {
         public int[] nextLargerNodes(ListNode head) {
-            return null;
+            List<Integer> list = new ArrayList<>();
+            while (null != head) {
+                list.add(head.val);
+                head = head.next;
+            }
+
+            int[] res = new int[list.size()];
+
+            for (int index = 0; index < list.size(); index++) {
+                for (int target = index; target < list.size(); target++) {
+                    if (list.get(target) > list.get(index)) {
+                        res[index] = list.get(target);
+                        break;
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * 1.数据读取到list
+     * 2.单调栈
+     *
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     */
+    private class Solution2 {
+        public int[] nextLargerNodes(ListNode head) {
+            List<Integer> list = new ArrayList<>();
+            while (null != head) {
+                list.add(head.val);
+                head = head.next;
+            }
+
+            int[] res = new int[list.size()];
+
+            Stack<Integer> stack = new Stack<>();
+            for (int index = 0; index < list.size(); index++) {
+                while (!stack.isEmpty()) {
+                    if (list.get(index) <= list.get(stack.peek())) {
+                        break;
+                    }
+                    res[stack.pop()] = list.get(index);
+                }
+
+                stack.push(index);
+            }
+
+            return res;
         }
     }
 
