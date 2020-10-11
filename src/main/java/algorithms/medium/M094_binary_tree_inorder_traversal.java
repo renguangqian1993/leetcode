@@ -27,7 +27,7 @@ import java.util.Stack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class M094_binary_tree_inorder_traversal {
-    class Solution {
+    private class Solution {
         List<Integer> list = new ArrayList<>();
         public List<Integer> inorderTraversal(TreeNode root) {
             if (!Objects.isNull(root)) {
@@ -46,7 +46,7 @@ public class M094_binary_tree_inorder_traversal {
         }
     }
 
-    class Solution2 {
+    private class Solution2 {
         List<Integer> list = new ArrayList<>();
         public List<Integer> inorderTraversal(TreeNode root) {
             if (!Objects.isNull(root)) {

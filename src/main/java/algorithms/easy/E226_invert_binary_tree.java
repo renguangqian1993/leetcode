@@ -34,7 +34,7 @@ import java.util.Objects;
  */
 public class E226_invert_binary_tree {
 
-    class Solution {
+    private class Solution {
         public TreeNode invertTree(TreeNode root) {
             if (!Objects.isNull(root)) {
                 TreeNode newLeft = invertTree(root.right);

@@ -51,7 +51,7 @@ package algorithms.medium;
  */
 public class M701_insert_into_a_binary_search_tree {
 
-    class SolutionByDfs {
+    private class SolutionByDfs {
         public TreeNode insertIntoBST(TreeNode root, int val) {
             if (root == null) {
                 return new TreeNode(val);
@@ -75,7 +75,7 @@ public class M701_insert_into_a_binary_search_tree {
         }
     }
 
-    class SolutionByWhile {
+    private class SolutionByWhile {
         public TreeNode insertIntoBST(TreeNode root, int val) {
             if (root == null) {
                 return new TreeNode(val);

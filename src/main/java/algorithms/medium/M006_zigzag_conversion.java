@@ -51,7 +51,7 @@ public class M006_zigzag_conversion {
 
     }
 
-    class Solution {
+    private class Solution {
         public String convert(String s, int numRows) {
             if (numRows <= 1) {
                 return s;

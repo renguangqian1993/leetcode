@@ -27,7 +27,7 @@ public class E404_sum_of_left_leaves {
         return !Objects.isNull(node) && Objects.isNull(node.left) && Objects.isNull(node.right);
     }
     //深度优先搜索 + 递归
-    class SolutionByDfsAndRecursively {
+    private class SolutionByDfsAndRecursively {
         public int sumOfLeftLeaves(TreeNode root) {
             if (Objects.isNull(root)) {
                 return 0;
@@ -46,7 +46,7 @@ public class E404_sum_of_left_leaves {
     }
 
     //广度优先搜索 + 栈操作
-    class SolutionByBfsAndStack {
+    private class SolutionByBfsAndStack {
         public int sumOfLeftLeaves(TreeNode root) {
             if (Objects.isNull(root)) {
                 return 0;

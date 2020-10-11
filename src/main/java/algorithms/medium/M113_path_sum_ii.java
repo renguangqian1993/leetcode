@@ -33,7 +33,7 @@ import java.util.Objects;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class M113_path_sum_ii {
-    class SolutionByDfs {
+    private class SolutionByDfs {
         private List<List<Integer>> lists = new ArrayList<>();
         private List<Integer> list = new ArrayList<>();
         public List<List<Integer>> pathSum(TreeNode root, int sum) {

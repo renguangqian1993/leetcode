@@ -51,7 +51,7 @@ package algorithms.medium;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class M1541_minimum_insertions_to_balance_a_parentheses_string {
-    class Solution {
+    private class Solution {
         public int minInsertions(String s) {
             int count = 0;
 

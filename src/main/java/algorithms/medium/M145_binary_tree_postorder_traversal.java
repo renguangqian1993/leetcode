@@ -28,7 +28,7 @@ import java.util.Stack;
  */
 public class M145_binary_tree_postorder_traversal {
 
-    class Solution {
+    private class Solution {
         private List<Integer> list = new ArrayList<>();
         public List<Integer> postorderTraversal(TreeNode root) {
             visitNodeRecursively(root);
@@ -46,7 +46,7 @@ public class M145_binary_tree_postorder_traversal {
         }
     }
 
-    class SolutionByStack {
+    private class SolutionByStack {
         private List<Integer> list = new ArrayList<>();
         public List<Integer> postorderTraversal(TreeNode root) {
             if (!Objects.isNull(root)) {

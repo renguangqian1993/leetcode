@@ -29,7 +29,7 @@ import java.util.Stack;
 public class M144_binary_tree_preorder_traversal {
 
 
-    class Solution {
+    private class Solution {
         List<Integer> list = new ArrayList<>();
         public List<Integer> preorderTraversal(TreeNode root) {
             visitNodeRecursively(root);
@@ -46,7 +46,7 @@ public class M144_binary_tree_preorder_traversal {
         }
     }
 
-    class SolutionByStack {
+    private class SolutionByStack {
         List<Integer> list = new ArrayList<>();
         public List<Integer> preorderTraversal(TreeNode root) {
             if (!Objects.isNull(root)) {

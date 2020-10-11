@@ -52,7 +52,7 @@ import java.util.Map;
  */
 public class M1410_html_entity_parser {
 
-    class Solution {
+    private class Solution {
         private Map<String, Character> charMap = new HashMap<>(){{
             put("&quot;", '"');
             put("&apos;", '\'');

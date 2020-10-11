@@ -42,7 +42,7 @@ public class M079_word_search {
         System.out.println(solution.exist(board, word));
     }
 
-    static class Solution {
+    private static class Solution {
         public boolean exist(char[][] board, String word) {
             char[] wordChars = word.toCharArray();
             boolean[][] accessedFlag = new boolean[board.length][board[0].length];

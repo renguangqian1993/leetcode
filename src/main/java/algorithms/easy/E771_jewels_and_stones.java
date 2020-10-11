@@ -25,7 +25,7 @@ import java.util.Set;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class E771_jewels_and_stones {
-    class SolutionByHash {
+    private class SolutionByHash {
         public int numJewelsInStones(String J, String S) {
             if (null == J || J.length() == 0 || null == S || S.length() == 0) {
                 return 0;
@@ -46,7 +46,7 @@ public class E771_jewels_and_stones {
             return count;
         }
     }
-    class SolutionByArray {
+    private class SolutionByArray {
         public int numJewelsInStones(String J, String S) {
             if (null == J || J.length() == 0 || null == S || S.length() == 0) {
                 return 0;

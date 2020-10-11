@@ -48,7 +48,7 @@ import java.util.Stack;
  */
 public class E682_baseball_game {
 
-    class Solution {
+    private class Solution {
         public int calPoints(String[] ops) {
             Stack<Integer> scores = new Stack<>();
 

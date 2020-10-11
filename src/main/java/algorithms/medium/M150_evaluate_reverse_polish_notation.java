@@ -69,7 +69,7 @@ public class M150_evaluate_reverse_polish_notation {
 
     }
 
-    class SolutionByStackAndRegex {
+    private class SolutionByStackAndRegex {
         private static final String REGEX_NUM = "^(-)*[0-9]{1,}$";
         private boolean ifNum(String token) {
             return token.matches(REGEX_NUM);
@@ -107,7 +107,7 @@ public class M150_evaluate_reverse_polish_notation {
             return stack.pop();
         }
     }
-    class SolutionByStack {
+    private class SolutionByStack {
         public int evalRPN(String[] tokens) {
             Stack<Integer> stack = new Stack<>();
             for (String token : tokens) {
@@ -148,7 +148,7 @@ public class M150_evaluate_reverse_polish_notation {
             return stack.pop();
         }
     }
-    class SolutionByArray {
+    private class SolutionByArray {
         public int evalRPN(String[] tokens) {
             int[] array = new int[tokens.length / 2 + 1];
             int top = -1;

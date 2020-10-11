@@ -65,7 +65,7 @@ public class M071_simplify_path {
         }
     }
 
-    class Solution {
+    private class Solution {
 
         public String simplifyPath(String path) {
             Stack<String> stack = new Stack<>();

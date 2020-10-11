@@ -42,7 +42,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class M331_verify_preorder_serialization_of_a_binary_tree {
 
-    class Solution {
+    private class Solution {
         public boolean isValidSerialization(String preorder) {
             String[] nodes = preorder.split(",");
             AtomicInteger index = new AtomicInteger(0);

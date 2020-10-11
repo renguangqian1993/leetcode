@@ -30,7 +30,7 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class M078_subsets {
-    class SolutionRecursively {
+    private class SolutionRecursively {
         List<List<Integer>> lists = new ArrayList<>();
         public List<List<Integer>> subsets(int[] nums) {
             choice(nums, 0, new ArrayList<>());
@@ -52,7 +52,7 @@ public class M078_subsets {
         }
     }
 
-    class SolutionByByte {
+    private class SolutionByByte {
         public List<List<Integer>> subsets(int[] nums) {
             List<List<Integer>> lists = new ArrayList<>();
             int size = nums.length;

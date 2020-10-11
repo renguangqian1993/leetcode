@@ -33,7 +33,7 @@ public class M103_binary_tree_zigzag_level_order_traversal {
     }
 
     //广度优先搜索 + 栈
-    class SolutionByBfsAndStack {
+    private class SolutionByBfsAndStack {
         public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
             List<List<Integer>> lists = new ArrayList<>();
             if (!Objects.isNull(root)) {
@@ -80,7 +80,7 @@ public class M103_binary_tree_zigzag_level_order_traversal {
     }
 
     //深度优先搜索 + 队列
-    class SolutionByDfsAndQueue {
+    private class SolutionByDfsAndQueue {
         public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
             List<List<Integer>> lists = new ArrayList<>();
             if (!Objects.isNull(root)) {
