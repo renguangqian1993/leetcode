@@ -107,6 +107,80 @@ public class M1019_next_greater_node_in_linked_list {
         }
     }
 
+    /**
+     * 参考别人的解答
+     * 1.数据读取到list
+     * 2.对list从后往前读
+     * 3.如果list的下一位数据大于list的当前位，则赋值给res数组
+     * 4.否则（即list的下一位小于list的当前位），判断res[currIndex+1]（即list的下一位的“下一个更大节点”）（即加速计算）
+     */
+    private class Solution3 {
+        public int[] nextLargerNodes(ListNode head) {
+            List<Integer> list = new ArrayList<>();
+            while (null != head) {
+                list.add(head.val);
+                head = head.next;
+            }
+
+            int[] res = new int[list.size()];
+
+            for (int index = list.size() - 1 - 1; index >= 0; index--) {
+                int largerIndex = index + 1;
+                int largerNum = list.get(largerIndex);
+                while (largerIndex < list.size()) {
+                    if (largerNum > list.get(index)) {
+                        res[index] = largerNum;
+                        break;
+                    } else if ((largerNum = res[largerIndex++]) == 0) {
+                        break;
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * 参考别人的加大
+     * 递归 + 单调栈
+     */
+    private class Solution4 {
+        //单调栈，栈顶（小）->栈底（大）
+        private Stack<Integer> stack = new Stack<>();
+        private int[] res;
+        //当前递归的index
+        private int index = 0;
+
+        public int[] nextLargerNodes(ListNode head) {
+            dealNode(head);
+            return res;
+        }
+
+        private void dealNode(ListNode node) {
+            if (null == node) {
+                //链表遍历结束，初始化数组
+                res = new int[index];
+                return;
+            }
+
+            //index++，递归
+            index++;
+            dealNode(node.next);
+
+            //弹出栈顶元素，直到遇到比当前节点大的元素
+            while (!stack.isEmpty() && node.val >= stack.peek()) {
+                stack.pop();
+            }
+
+            //--index，经过上边while处理，栈顶元素即为“下一个更大节点”
+            res[--index] = stack.isEmpty() ? 0 : stack.peek();
+
+            //当前元素入栈顶
+            stack.push(node.val);
+        }
+    }
+
     private class ListNode {
         int val;
         ListNode next;
