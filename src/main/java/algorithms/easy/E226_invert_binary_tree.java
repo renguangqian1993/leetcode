@@ -47,7 +47,7 @@ public class E226_invert_binary_tree {
 
     }
 
-    public class TreeNode {
+    private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

@@ -77,7 +77,7 @@ public class M094_binary_tree_inorder_traversal {
 
     }
 
-    public class TreeNode {
+    private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

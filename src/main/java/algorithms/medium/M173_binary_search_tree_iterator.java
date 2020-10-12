@@ -78,7 +78,7 @@ public class M173_binary_search_tree_iterator {
         }
     }
 
-    public class TreeNode {
+    private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

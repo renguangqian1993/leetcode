@@ -94,7 +94,7 @@ public class first_common_ancestor_lcci {
         return null;
     }
 
-    public class TreeNode {
+    private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

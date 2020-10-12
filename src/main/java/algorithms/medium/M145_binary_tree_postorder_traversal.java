@@ -79,7 +79,7 @@ public class M145_binary_tree_postorder_traversal {
 
     }
 
-    public class TreeNode {
+    private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

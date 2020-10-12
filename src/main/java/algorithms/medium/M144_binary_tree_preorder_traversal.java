@@ -71,7 +71,7 @@ public class M144_binary_tree_preorder_traversal {
 
     }
 
-    public class TreeNode {
+    private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
