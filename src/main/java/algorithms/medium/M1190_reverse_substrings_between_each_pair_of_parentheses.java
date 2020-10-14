@@ -45,6 +45,10 @@ import java.util.Stack;
 public class M1190_reverse_substrings_between_each_pair_of_parentheses {
 
     public static void main(String[] args) {
+        Solution2 solution2 =
+                new M1190_reverse_substrings_between_each_pair_of_parentheses().new Solution2();
+
+        String[] arr = new String[]{"f(ul)ao(t(y)qbn)()sj", "(abcd)"};
     }
 
     /**
@@ -56,6 +60,7 @@ public class M1190_reverse_substrings_between_each_pair_of_parentheses {
 
         private int count = 0;
         private Stack<Character> stack = new Stack<>();
+
         public String reverseParentheses(String s) {
             for (int index = 0; index < s.length(); index++) {
                 if ('(' == s.charAt(index)) {
@@ -112,8 +117,55 @@ public class M1190_reverse_substrings_between_each_pair_of_parentheses {
 
     private class Solution2 {
 
+        private char[] chars;
+
         public String reverseParentheses(String s) {
-            return null;
+            chars = s.toCharArray();
+
+            int leftIndex = s.lastIndexOf('(');
+            int rightIndex = s.indexOf(')', leftIndex);
+
+            while (leftIndex >= 0 && rightIndex < s.length()) {
+                if (chars[leftIndex] != '(') {
+                    leftIndex--;
+                    continue;
+                }
+                if (chars[rightIndex] != ')') {
+                    rightIndex++;
+                    continue;
+                }
+                reverseArray(leftIndex, rightIndex);
+                leftIndex--;
+                rightIndex++;
+            }
+
+            StringBuilder builder = new StringBuilder();
+            for (char charTmp : chars) {
+                if ('(' != charTmp && ')' != charTmp) {
+                    builder.append(charTmp);
+                }
+            }
+
+            return builder.toString();
+        }
+
+        private void reverseArray(int leftIndex, int rightIndex) {
+            while (leftIndex < rightIndex) {
+                if (chars[leftIndex] == '(' || chars[leftIndex] == ')') {
+                    leftIndex++;
+                    continue;
+                }
+                if (chars[rightIndex] == '(' || chars[rightIndex] == ')') {
+                    rightIndex--;
+                    continue;
+                }
+                char charTmp = chars[leftIndex];
+                chars[leftIndex] = chars[rightIndex];
+                chars[rightIndex] = charTmp;
+
+                leftIndex++;
+                rightIndex--;
+            }
         }
 
     }
