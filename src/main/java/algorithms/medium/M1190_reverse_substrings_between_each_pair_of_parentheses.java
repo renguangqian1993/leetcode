@@ -122,8 +122,6 @@ public class M1190_reverse_substrings_between_each_pair_of_parentheses {
      *
      * 空间复杂度：O(N)
      * 时间复杂度：O(MN)，M为括号对数量
-     *
-     * 与Solution1相比优化点在于：使用了实例级变量存储，减少了递归带来的开销
      */
     private class Solution2 {
 
