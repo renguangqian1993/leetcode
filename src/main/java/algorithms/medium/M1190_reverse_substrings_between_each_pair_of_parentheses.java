@@ -53,8 +53,8 @@ public class M1190_reverse_substrings_between_each_pair_of_parentheses {
 
     /**
      * 字符串扫描+栈
-     * 空间复杂度：O(MN)，M为括号对数量
-     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * 时间复杂度：O(MN)，M为括号对数量
      */
     private class Solution1 {
 
@@ -115,31 +115,34 @@ public class M1190_reverse_substrings_between_each_pair_of_parentheses {
 
     }
 
+    /**
+     * 实例变量存储char[]
+     * 使用Stack记录左括号坐标
+     * 遍历字符串，遇到左括号入栈，遇到右括号则（弹出栈首部的左括号下标，操作char[]，交换数据）
+     *
+     * 空间复杂度：O(N)
+     * 时间复杂度：O(MN)，M为括号对数量
+     *
+     * 与Solution1相比优化点在于：使用了实例级变量存储，减少了递归带来的开销
+     */
     private class Solution2 {
 
         private char[] chars;
 
         public String reverseParentheses(String s) {
+            StringBuilder builder = new StringBuilder();
+
             chars = s.toCharArray();
 
-            int leftIndex = s.lastIndexOf('(');
-            int rightIndex = s.indexOf(')', leftIndex);
-
-            while (leftIndex >= 0 && rightIndex < s.length()) {
-                if (chars[leftIndex] != '(') {
-                    leftIndex--;
-                    continue;
+            Stack<Integer> stack = new Stack<>();
+            for (int index = 0; index < chars.length; index++) {
+                if ('(' == chars[index]) {
+                    stack.push(index);
+                } else if (')' == chars[index]) {
+                    reverseArray(stack.pop(), index);
                 }
-                if (chars[rightIndex] != ')') {
-                    rightIndex++;
-                    continue;
-                }
-                reverseArray(leftIndex, rightIndex);
-                leftIndex--;
-                rightIndex++;
             }
 
-            StringBuilder builder = new StringBuilder();
             for (char charTmp : chars) {
                 if ('(' != charTmp && ')' != charTmp) {
                     builder.append(charTmp);
