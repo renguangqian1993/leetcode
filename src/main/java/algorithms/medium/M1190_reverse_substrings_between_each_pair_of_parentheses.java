@@ -1,7 +1,9 @@
 package algorithms.medium;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -167,6 +169,53 @@ public class M1190_reverse_substrings_between_each_pair_of_parentheses {
                 leftIndex++;
                 rightIndex--;
             }
+        }
+
+    }
+
+    /**
+     * 不需要交换数组的解法
+     * 时间复杂度O(N)
+     * 空间复杂度O(N)
+     *
+     * 参考自：
+     * https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/solution/chong-dong-fa-yi-ge-zhi-zhen-de-qi-huan-piao-liu-b/
+     */
+    private class Solution3 {
+        public String reverseParentheses(String s) {
+            StringBuilder builder = new StringBuilder();
+
+            Map<Integer, Integer> indexPairMap = new HashMap<>();
+            Stack<Integer> indexStack = new Stack<>();
+            for (int index = 0; index < s.length(); index++) {
+                switch (s.charAt(index)) {
+                    case '(': {
+                        indexStack.push(index);
+                        break;
+                    }
+                    case ')': {
+                        int indexLeft = indexStack.pop();
+                        indexPairMap.put(indexLeft, index);
+                        indexPairMap.put(index, indexLeft);
+                        break;
+                    }
+                    default:
+                        //do nothing
+                        break;
+                }
+            }
+
+            for (int index = 0, step = 1; index < s.length() && index >= 0; index += step) {
+                if (indexPairMap.containsKey(index)) {
+                    //遇到括号
+                    index = indexPairMap.get(index);
+                    step = -step;
+                } else {
+                    builder.append(s.charAt(index));
+                }
+            }
+
+            return builder.toString();
         }
 
     }
