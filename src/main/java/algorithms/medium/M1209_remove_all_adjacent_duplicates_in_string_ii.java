@@ -45,14 +45,13 @@ import java.util.Stack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  **/
 public class M1209_remove_all_adjacent_duplicates_in_string_ii {
-    public static void main(String[] args) {
-    }
 
     /**
-     * 栈存储每个字符，遍历字符串
+     * 使用栈存储每个字符
+     * 遍历字符串，循环判断栈顶字符是否与当前字符相同，相同则出栈。数量达到阈值则丢弃掉，未达到阈值则重新入栈
      * 数据量很大时超时
      */
-    private static class Solution {
+    private static class Solution1 {
         public String removeDuplicates(String s, int k) {
             StringBuilder buffer = new StringBuilder();
 
@@ -79,4 +78,122 @@ public class M1209_remove_all_adjacent_duplicates_in_string_ii {
             return buffer.toString();
         }
     }
+
+    /**
+     * 使用栈存储每一个重复的字符出现的次数，使用StringBuilder存储已遍历的字符
+     * 遍历字符串，当前字符与上一个字符相同时，判断栈顶元素（上一个字符的重复次数），数量达到阈值则delete掉，未达到阈值则栈顶元素值+1
+     * 避免了 Solution1 使用栈存储字符时做的很多无用功
+     */
+    private static class Solution2 {
+        public String removeDuplicates(String s, int k) {
+            StringBuilder buffer = new StringBuilder();
+
+            Stack<Integer> stack = new Stack<>();
+            for (int index = 0; index < s.length(); index++) {
+                char c = s.charAt(index);
+                if (buffer.length() == 0 || buffer.charAt(buffer.length() - 1) != c) {
+                    //缓存为空 || 缓存尾部元素与当前元素不同
+                    buffer.append(c);
+                    stack.push(1);
+                    continue;
+                }
+
+                //缓存尾部元素与当前元素相同
+                if (stack.peek() + 1 >= k) {
+                    //达到数量阈值
+                    buffer.delete(buffer.length() - stack.pop(), buffer.length());
+                } else {
+                    //未达到数量阈值
+                    buffer.append(c);
+                    stack.push(stack.pop() + 1);
+                }
+            }
+
+            return buffer.toString();
+        }
+    }
+
+    /**
+     * 使用栈存储【字符,重复次数】，避免 Solution2 对StringBuilder的删除操作，空间换时间
+     */
+    private static class Solution3 {
+        public String removeDuplicates(String s, int k) {
+            StringBuilder buffer = new StringBuilder();
+
+            Stack<Pair> stack = new Stack<>();
+            for (int index = 0; index < s.length(); index++) {
+                char c = s.charAt(index);
+                if (stack.isEmpty() || stack.peek().c != c) {
+                    //栈为空 || 上一个字符与当前字符不同
+                    stack.push(new Pair(c, 1));
+                } else if (stack.peek().count + 1 >= k) {
+                    //上一个字符与当前字符相同，且数量达到阈值
+                    stack.pop();
+                } else {
+                    //上一个字符与当前字符相同，且数量未达到阈值
+                    stack.peek().count++;
+                }
+            }
+
+            while (!stack.isEmpty()) {
+                Pair pair = stack.pop();
+                while ((pair.count--) > 0) {
+                    buffer.append(pair.c);
+                }
+            }
+
+            return buffer.reverse().toString();
+        }
+
+        private static class Pair {
+            char c;
+            int count;
+
+            public Pair(char c, int count) {
+                this.c = c;
+                this.count = count;
+            }
+        }
+    }
+
+    /**
+     * 参考官方解答，快慢指针+栈
+     *
+     * 慢指针记录准备写入有效字符的下标（即慢指针之前的字符就是要返回的数据），快指针记录当前正在读取的下标，栈记录每个有效字符重复的次数
+     *
+     */
+    private static class Solution4 {
+        public String removeDuplicates(String s, int k) {
+            char[] chars = s.toCharArray();
+
+            Stack<Integer> countStack = new Stack<>();
+            int slow = 0;
+            int fast = 0;
+
+            while (fast < s.length()) {
+                //将当前遍历到的字符写入慢指针位置
+                chars[slow] = chars[fast];
+
+                if (slow == 0 || chars[slow - 1] != chars[fast]) {
+                    //当前没有有效数据 || 最后一位有效字符与当前字符不同
+                    countStack.push(1);
+                } else if (countStack.peek() + 1 >= k) {
+                    //最后一位有效字符重复次数达到阈值，出栈、慢指针后退
+                    countStack.pop();
+                    slow -= k;
+                } else {
+                    //重复次数+1
+                    countStack.push(countStack.pop() + 1);
+                }
+
+                //快慢指针均需要前进
+                slow++;
+                fast++;
+            }
+
+            return new String(chars, 0, slow);
+        }
+
+    }
+
 }
