@@ -74,16 +74,17 @@ public class M019_remove_nth_node_from_end_of_list {
 
             //target节点的上一个节点
             ListNode preNode = headHolder;
+            ListNode curr = headHolder;
 
             //当前遍历到的节点
-            while (head != null) {
+            while (curr.next != null) {
                 if (n-- <= 0) {
                     preNode = preNode.next;
                 }
-                head = head.next;
+                curr = curr.next;
             }
 
-            preNode.next = (null == preNode.next) ? null : preNode.next.next;
+            preNode.next = preNode.next.next;
 
             return headHolder.next;
         }
